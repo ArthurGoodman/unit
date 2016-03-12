@@ -1,10 +1,15 @@
 #include "basictest.h"
 
 #include <iostream>
+#include <iomanip>
 #include <windows.h>
 
 unit::BasicTest::BasicTest(const std::string &name)
     : name(name), passed(false) {
+}
+
+void unit::BasicTest::align(int maxNameLength) {
+    this->maxNameLength = maxNameLength;
 }
 
 std::string unit::BasicTest::getName() {
@@ -12,13 +17,13 @@ std::string unit::BasicTest::getName() {
 }
 
 void unit::BasicTest::report() {
-    std::cout << name << " ";
+    std::cout << name << std::setw(maxNameLength - (int)name.length() + 3) << " [";
 
     setConsoleColor(passed ? FOREGROUND_GREEN : FOREGROUND_RED);
     std::cout << (passed ? "OK" : "FAIL");
     resetConsoleColor();
 
-    std::cout << std::endl;
+    std::cout << "]" << std::endl;
 }
 
 void unit::BasicTest::pass() {

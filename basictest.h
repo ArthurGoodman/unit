@@ -9,9 +9,12 @@ class BasicTest : public ITest {
     std::string name;
     bool passed;
     unsigned short attributes;
+    int maxNameLength;
 
 public:
     BasicTest(const std::string &name);
+
+    void align(int maxNameLength);
 
     std::string getName();
 

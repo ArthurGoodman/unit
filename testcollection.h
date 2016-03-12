@@ -11,7 +11,7 @@ class TestCollection {
 public:
     ~TestCollection();
 
-    void addTest(ITest *test);
+    virtual void addTest(ITest *test);
 
     std::vector<ITest *>::iterator begin();
     std::vector<ITest *>::iterator end();

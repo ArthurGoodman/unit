@@ -5,7 +5,12 @@
 #include "literalmatchtest.h"
 
 unit::TestSet::TestSet(const std::string &name)
-    : name(name) {
+    : name(name), maxNameLength(0) {
+}
+
+void unit::TestSet::addTest(unit::ITest *test) {
+    maxNameLength = std::max(maxNameLength, (int)test->getName().length());
+    TestCollection::addTest(test);
 }
 
 std::string unit::TestSet::getName() {
@@ -17,6 +22,10 @@ void unit::TestSet::run() {
 
     for (ITest *test : *this) {
         test->run();
+
+        if (dynamic_cast<BasicTest *>(test))
+            ((BasicTest *)test)->align(maxNameLength);
+
         test->report();
     }
 

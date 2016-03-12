@@ -14,7 +14,7 @@ class TestSet : public TestCollection, public ITest {
 public:
     TestSet(const std::string &name);
 
-    void addTest(ITest *test);
+    void addTest(ITest *$);
 
     std::string getName();
 
@@ -22,6 +22,6 @@ public:
 
     void report();
 
-    void test(const std::string &name, const std::string &result, const std::function<void()> &f);
+    void $(const std::string &name, const std::string &result, const std::function<void()> &f);
 };
 }

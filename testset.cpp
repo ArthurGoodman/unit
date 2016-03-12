@@ -35,6 +35,6 @@ void unit::TestSet::run() {
 void unit::TestSet::report() {
 }
 
-void unit::TestSet::test(const std::string &name, const std::string &result, const std::function<void()> &f) {
+void unit::TestSet::$(const std::string &name, const std::string &result, const std::function<void()> &f) {
     addTest(new LiteralMatchTest(name, result, f));
 }

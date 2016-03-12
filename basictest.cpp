@@ -17,7 +17,7 @@ std::string unit::BasicTest::getName() {
 }
 
 void unit::BasicTest::report() {
-    std::cout << name << std::setw(maxNameLength - (int)name.length() + 3) << " [";
+    std::cout << name << std::setw(maxNameLength - (int)name.length() + 2) << " [";
 
     setConsoleColor(passed ? FOREGROUND_GREEN : FOREGROUND_RED);
     std::cout << (passed ? "OK" : "FAIL");

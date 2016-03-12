@@ -8,6 +8,7 @@ namespace unit {
 class BasicTest : public ITest {
     std::string name;
     bool passed;
+    unsigned short attributes;
 
 public:
     BasicTest(const std::string &name);
@@ -18,5 +19,9 @@ public:
 
 protected:
     void pass();
+
+private:
+    void setConsoleColor(unsigned long color);
+    void resetConsoleColor();
 };
 }

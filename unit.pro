@@ -3,6 +3,12 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp
+CONFIG += staticlib
+
+DEFINES += UNIT
+
+SOURCES += \
+    unit.cpp
 
 HEADERS += \
+    unit.h

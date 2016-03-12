@@ -5,10 +5,10 @@ CONFIG -= qt
 
 CONFIG += staticlib
 
-DEFINES += UNIT
-
 SOURCES += \
-    unit.cpp
+    test.cpp \
+    testmanager.cpp
 
 HEADERS += \
-    unit.h
+    test.h \
+    testmanager.h

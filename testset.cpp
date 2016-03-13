@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "literalmatchtest.h"
+#include "basictest.h"
 
 unit::TestSet::TestSet(const std::string &name)
     : name(name), maxNameLength(0) {
@@ -33,8 +33,4 @@ void unit::TestSet::run() {
 }
 
 void unit::TestSet::report() {
-}
-
-void unit::TestSet::$(const std::string &name, const std::string &result, const std::function<void()> &f) {
-    addTest(new LiteralMatchTest(name, result, f));
 }

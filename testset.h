@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-#include <functional>
-
 #include "testcollection.h"
 #include "itest.h"
 
@@ -17,11 +14,7 @@ public:
     void addTest(ITest *$);
 
     std::string getName();
-
     void run();
-
     void report();
-
-    void $(const std::string &name, const std::string &result, const std::function<void()> &f);
 };
 }

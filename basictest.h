@@ -17,7 +17,6 @@ public:
     void align(int maxNameLength);
 
     std::string getName();
-
     void report();
 
 protected:

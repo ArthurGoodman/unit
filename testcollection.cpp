@@ -1,6 +1,7 @@
 #include "testcollection.h"
 
 #include "itest.h"
+#include "literalmatchtest.h"
 
 unit::TestCollection::~TestCollection() {
     for (ITest *test : *this)
@@ -17,4 +18,8 @@ std::vector<unit::ITest *>::iterator unit::TestCollection::begin() {
 
 std::vector<unit::ITest *>::iterator unit::TestCollection::end() {
     return tests.end();
+}
+
+void unit::TestCollection::$(const std::string &name, const std::string &result, const std::function<void()> &f) {
+    addTest(new LiteralMatchTest(name, result, f));
 }

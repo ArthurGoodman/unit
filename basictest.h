@@ -5,7 +5,10 @@
 #include "itest.h"
 
 namespace unit {
-class BasicTest : public ITest {
+class BasicTest;
+}
+
+class unit::BasicTest : public ITest {
     std::string name;
     bool passed;
     unsigned short attributes;
@@ -26,4 +29,3 @@ private:
     void setConsoleColor(unsigned long color);
     void resetConsoleColor();
 };
-}

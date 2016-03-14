@@ -6,8 +6,10 @@
 
 namespace unit {
 class ITest;
+class TestCollection;
+}
 
-class TestCollection {
+class unit::TestCollection {
     std::vector<ITest *> tests;
 
 public:
@@ -20,4 +22,3 @@ public:
     std::vector<ITest *>::iterator begin();
     std::vector<ITest *>::iterator end();
 };
-}

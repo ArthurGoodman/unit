@@ -5,7 +5,10 @@
 #include "basictest.h"
 
 namespace unit {
-class FunctionTest : public BasicTest {
+class FunctionTest;
+}
+
+class unit::FunctionTest : public BasicTest {
     std::function<void()> f;
 
 public:
@@ -14,4 +17,3 @@ public:
 protected:
     std::string invoke();
 };
-}

@@ -3,7 +3,10 @@
 #include <string>
 
 namespace unit {
-class ITest {
+class ITest;
+}
+
+class unit::ITest {
 public:
     virtual ~ITest();
 
@@ -11,4 +14,3 @@ public:
     virtual void run() = 0;
     virtual void report() = 0;
 };
-}

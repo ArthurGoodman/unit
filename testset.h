@@ -4,7 +4,10 @@
 #include "itest.h"
 
 namespace unit {
-class TestSet : public TestCollection, public ITest {
+class TestSet;
+}
+
+class unit::TestSet : public TestCollection, public ITest {
     std::string name;
     int maxNameLength;
 
@@ -17,4 +20,3 @@ public:
     void run();
     void report();
 };
-}

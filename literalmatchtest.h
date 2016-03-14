@@ -6,7 +6,10 @@
 #include "functiontest.h"
 
 namespace unit {
-class LiteralMatchTest : public FunctionTest {
+class LiteralMatchTest;
+}
+
+class unit::LiteralMatchTest : public FunctionTest {
     std::string result;
 
 public:
@@ -14,4 +17,3 @@ public:
 
     void run();
 };
-}

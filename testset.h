@@ -14,7 +14,7 @@ class unit::TestSet : public TestCollection, public ITest {
 public:
     TestSet(const std::string &name);
 
-    void addTest(ITest *$);
+    void addTest(ITest *test);
 
     std::string getName();
     void run();

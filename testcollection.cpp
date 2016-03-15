@@ -12,14 +12,14 @@ void unit::TestCollection::addTest(ITest *test) {
     tests.push_back(test);
 }
 
+void unit::TestCollection::$(const std::string &name, const std::string &result, const std::function<void()> &f) {
+    addTest(new LiteralMatchTest(name, result, f));
+}
+
 std::vector<unit::ITest *>::iterator unit::TestCollection::begin() {
     return tests.begin();
 }
 
 std::vector<unit::ITest *>::iterator unit::TestCollection::end() {
     return tests.end();
-}
-
-void unit::TestCollection::$(const std::string &name, const std::string &result, const std::function<void()> &f) {
-    addTest(new LiteralMatchTest(name, result, f));
 }

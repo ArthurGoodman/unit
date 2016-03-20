@@ -5,7 +5,7 @@
 #include <windows.h>
 
 unit::BasicTest::BasicTest(const std::string &name)
-    : name(name), passed(false) {
+    : name(name), passed(false), maxNameLength(0) {
 }
 
 void unit::BasicTest::align(int maxNameLength) {

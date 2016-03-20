@@ -12,7 +12,8 @@ SOURCES += \
     testcollection.cpp \
     literalmatchtest.cpp \
     functiontest.cpp \
-    basictest.cpp
+    basictest.cpp \
+    test.cpp
 
 HEADERS += \
     testset.h \
@@ -21,4 +22,5 @@ HEADERS += \
     testcollection.h \
     literalmatchtest.h \
     functiontest.h \
-    basictest.h
+    basictest.h \
+    test.h

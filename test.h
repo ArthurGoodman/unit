@@ -35,7 +35,7 @@ class unit::Test : public BasicTest {
     class Checker {
     protected:
         Test<F> &test;
-        const std::function<bool(bool)> &predicate;
+        std::function<bool(bool)> predicate;
 
     public:
         Checker(Test<F> &test, const std::function<bool(bool)> &predicate);

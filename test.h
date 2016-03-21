@@ -8,64 +8,82 @@
 #include "function_traits.h"
 
 namespace unit {
-template <class F>
+template <class>
 class Checker;
 
-template <class F, class C>
+template <class, class>
 class Test;
 }
 
 template <class F>
 class unit::Checker {
-    class CheckerBase {
-    protected:
-        Checker<F> &checker;
-        std::function<bool(bool)> predicate;
-
-    public:
-        CheckerBase(Checker<F> &checker, const std::function<bool(bool)> &predicate);
-    };
+    class CheckerBase;
 
     F f;
 
 public:
     std::function<bool()> check;
 
-    class ValueChecker : public CheckerBase {
-        typedef typename function_traits<F>::return_type T;
-
-    public:
-        class Be : public CheckerBase {
-        public:
-            Be(Checker<F> &checker, const std::function<bool(bool)> &predicate);
-
-            void equal(T value);
-            void operator==(T value);
-
-            void lessThan(T value);
-            void operator<(T value);
-
-            void ok();
-        } be;
-
-        ValueChecker(Checker<F> &checker, const std::function<bool(bool)> &predicate);
-    };
-
-    class ActionChecker : public CheckerBase {
-    public:
-        class Be : public CheckerBase {
-        public:
-            Be(Checker<F> &checker, const std::function<bool(bool)> &predicate);
-
-            void ok();
-        } be;
-
-        ActionChecker(Checker<F> &checker, const std::function<bool(bool)> &predicate);
-
-        void print(const std::string &text);
-    };
+    class ValueChecker;
+    class ActionChecker;
 
     Checker(F f);
+};
+
+template <class F>
+class unit::Checker<F>::CheckerBase {
+protected:
+    Checker<F> &checker;
+    std::function<bool(bool)> predicate;
+
+public:
+    CheckerBase(Checker<F> &checker, const std::function<bool(bool)> &predicate);
+};
+
+template <class F>
+class unit::Checker<F>::ValueChecker : public CheckerBase {
+    typedef typename function_traits<F>::return_type T;
+
+    class Be;
+
+public:
+    Be be;
+
+    ValueChecker(Checker<F> &checker, const std::function<bool(bool)> &predicate);
+};
+
+template <class F>
+class unit::Checker<F>::ValueChecker::Be : public CheckerBase {
+public:
+    Be(Checker<F> &checker, const std::function<bool(bool)> &predicate);
+
+    void equal(T value);
+    void operator==(T value);
+
+    void lessThan(T value);
+    void operator<(T value);
+
+    void ok();
+};
+
+template <class F>
+class unit::Checker<F>::ActionChecker : public CheckerBase {
+    class Be;
+
+public:
+    Be be;
+
+    ActionChecker(Checker<F> &checker, const std::function<bool(bool)> &predicate);
+
+    void print(const std::string &text);
+};
+
+template <class F>
+class unit::Checker<F>::ActionChecker::Be : public CheckerBase {
+public:
+    Be(Checker<F> &checker, const std::function<bool(bool)> &predicate);
+
+    void ok();
 };
 
 template <class F, class C>
@@ -93,8 +111,8 @@ unit::Checker<F>::ValueChecker::Be::Be(Checker<F> &checker, const std::function<
 
 template <class F>
 void unit::Checker<F>::ValueChecker::Be::equal(T value) {
-    this->test.checker = [=]() {
-        return this->predicate(this->test.f() == value);
+    this->checker.check = [=]() {
+        return this->predicate(this->checker.f() == value);
     };
 }
 
@@ -105,8 +123,8 @@ void unit::Checker<F>::ValueChecker::Be::operator==(T value) {
 
 template <class F>
 void unit::Checker<F>::ValueChecker::Be::lessThan(T value) {
-    this->test.checker = [=]() {
-        return this->predicate(this->test.f() < value);
+    this->checker.check = [=]() {
+        return this->predicate(this->checker.f() < value);
     };
 }
 
@@ -117,9 +135,9 @@ void unit::Checker<F>::ValueChecker::Be::operator<(T value) {
 
 template <class F>
 void unit::Checker<F>::ValueChecker::Be::ok() {
-    this->test.checker = [=]() {
+    this->checker.check = [=]() {
         try {
-            this->test.f();
+            this->checker.f();
             return this->predicate(true);
         } catch (...) {
             return this->predicate(false);
@@ -128,20 +146,20 @@ void unit::Checker<F>::ValueChecker::Be::ok() {
 }
 
 template <class F>
-unit::Checker<F>::ValueChecker::ValueChecker(Checker<F> &test, const std::function<bool(bool)> &predicate)
-    : CheckerBase(test, predicate), be(test, predicate) {
+unit::Checker<F>::ValueChecker::ValueChecker(Checker<F> &checker, const std::function<bool(bool)> &predicate)
+    : CheckerBase(checker, predicate), be(checker, predicate) {
 }
 
 template <class F>
-unit::Checker<F>::ActionChecker::Be::Be(Checker<F> &test, const std::function<bool(bool)> &predicate)
-    : CheckerBase(test, predicate) {
+unit::Checker<F>::ActionChecker::Be::Be(Checker<F> &checker, const std::function<bool(bool)> &predicate)
+    : CheckerBase(checker, predicate) {
 }
 
 template <class F>
 void unit::Checker<F>::ActionChecker::Be::ok() {
-    this->test.checker = [=]() {
+    this->checker.check = [=]() {
         try {
-            this->test.f();
+            this->checker.f();
             return this->predicate(true);
         } catch (...) {
             return this->predicate(false);
@@ -150,8 +168,8 @@ void unit::Checker<F>::ActionChecker::Be::ok() {
 }
 
 template <class F>
-unit::Checker<F>::ActionChecker::ActionChecker(Checker<F> &test, const std::function<bool(bool)> &predicate)
-    : CheckerBase(test, predicate), be(test, predicate) {
+unit::Checker<F>::ActionChecker::ActionChecker(Checker<F> &checker, const std::function<bool(bool)> &predicate)
+    : CheckerBase(checker, predicate), be(checker, predicate) {
 }
 
 template <class F>

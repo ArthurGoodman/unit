@@ -10,7 +10,6 @@ SOURCES += \
     testrunner.cpp \
     itest.cpp \
     testcollection.cpp \
-    functiontest.cpp \
     test.cpp \
     testbase.cpp
 
@@ -19,7 +18,6 @@ HEADERS += \
     testrunner.h \
     itest.h \
     testcollection.h \
-    functiontest.h \
     test.h \
     testbase.h \
     function_traits.h

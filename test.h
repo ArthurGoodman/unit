@@ -93,8 +93,8 @@ unit::Checker<F>::ValueChecker::Be::Be(Checker<F> &checker, const std::function<
 
 template <class F>
 void unit::Checker<F>::ValueChecker::Be::equal(T value) {
-    Be::test.checker = [=]() {
-        return Be::predicate(Be::test.f() == value);
+    this->test.checker = [=]() {
+        return this->predicate(this->test.f() == value);
     };
 }
 
@@ -105,8 +105,8 @@ void unit::Checker<F>::ValueChecker::Be::operator==(T value) {
 
 template <class F>
 void unit::Checker<F>::ValueChecker::Be::lessThan(T value) {
-    Be::test.checker = [=]() {
-        return Be::predicate(Be::test.f() < value);
+    this->test.checker = [=]() {
+        return this->predicate(this->test.f() < value);
     };
 }
 
@@ -117,12 +117,12 @@ void unit::Checker<F>::ValueChecker::Be::operator<(T value) {
 
 template <class F>
 void unit::Checker<F>::ValueChecker::Be::ok() {
-    Be::test.checker = [=]() {
+    this->test.checker = [=]() {
         try {
-            Be::test.f();
-            return Be::predicate(true);
+            this->test.f();
+            return this->predicate(true);
         } catch (...) {
-            return Be::predicate(false);
+            return this->predicate(false);
         }
     };
 }
@@ -139,12 +139,12 @@ unit::Checker<F>::ActionChecker::Be::Be(Checker<F> &test, const std::function<bo
 
 template <class F>
 void unit::Checker<F>::ActionChecker::Be::ok() {
-    Be::test.checker = [=]() {
+    this->test.checker = [=]() {
         try {
-            Be::test.f();
-            return Be::predicate(true);
+            this->test.f();
+            return this->predicate(true);
         } catch (...) {
-            return Be::predicate(false);
+            return this->predicate(false);
         }
     };
 }
@@ -156,16 +156,16 @@ unit::Checker<F>::ActionChecker::ActionChecker(Checker<F> &test, const std::func
 
 template <class F>
 void unit::Checker<F>::ActionChecker::print(const std::string &text) {
-    ActionChecker::checker.check = [=]() {
+    this->checker.check = [=]() {
         std::streambuf *buf = std::cout.rdbuf();
         std::ostringstream stream;
         std::cout.rdbuf(stream.rdbuf());
 
-        ActionChecker::checker.f();
+        this->checker.f();
 
         std::cout.rdbuf(buf);
 
-        return ActionChecker::predicate(stream.str() == text);
+        return this->predicate(stream.str() == text);
     };
 }
 

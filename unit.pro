@@ -10,17 +10,16 @@ SOURCES += \
     testrunner.cpp \
     itest.cpp \
     testcollection.cpp \
-    literalmatchtest.cpp \
     functiontest.cpp \
-    basictest.cpp \
-    test.cpp
+    test.cpp \
+    testbase.cpp
 
 HEADERS += \
     testset.h \
     testrunner.h \
     itest.h \
     testcollection.h \
-    literalmatchtest.h \
     functiontest.h \
-    basictest.h \
-    test.h
+    test.h \
+    testbase.h \
+    function_traits.h

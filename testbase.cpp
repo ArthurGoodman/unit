@@ -1,22 +1,22 @@
-#include "basictest.h"
+#include "testbase.h"
 
 #include <iostream>
 #include <iomanip>
 #include <windows.h>
 
-unit::BasicTest::BasicTest(const std::string &name)
+unit::TestBase::TestBase(const std::string &name)
     : name(name), passed(false), maxNameLength(0) {
 }
 
-void unit::BasicTest::align(int maxNameLength) {
+void unit::TestBase::align(int maxNameLength) {
     this->maxNameLength = maxNameLength;
 }
 
-std::string unit::BasicTest::getName() {
+std::string unit::TestBase::getName() {
     return name;
 }
 
-void unit::BasicTest::report() {
+void unit::TestBase::report() {
     std::cout << name << std::setw(maxNameLength - (int)name.length() + 2) << " [";
 
     setConsoleColor(passed ? FOREGROUND_GREEN : FOREGROUND_RED);
@@ -26,11 +26,11 @@ void unit::BasicTest::report() {
     std::cout << "]" << std::endl;
 }
 
-void unit::BasicTest::pass() {
+void unit::TestBase::pass() {
     passed = true;
 }
 
-void unit::BasicTest::setConsoleColor(unsigned long color) {
+void unit::TestBase::setConsoleColor(unsigned long color) {
     CONSOLE_SCREEN_BUFFER_INFO info;
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     GetConsoleScreenBufferInfo(handle, &info);
@@ -38,6 +38,6 @@ void unit::BasicTest::setConsoleColor(unsigned long color) {
     SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | color);
 }
 
-void unit::BasicTest::resetConsoleColor() {
+void unit::TestBase::resetConsoleColor() {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), attributes);
 }

@@ -4,7 +4,7 @@
 #include <sstream>
 
 unit::FunctionTest::FunctionTest(const std::string &name, const std::function<void()> &f)
-    : unit::BasicTest(name), f(f) {
+    : unit::TestBase(name), f(f) {
 }
 
 std::string unit::FunctionTest::invoke() {

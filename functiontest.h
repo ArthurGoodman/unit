@@ -2,13 +2,13 @@
 
 #include <functional>
 
-#include "basictest.h"
+#include "testbase.h"
 
 namespace unit {
 class FunctionTest;
 }
 
-class unit::FunctionTest : public BasicTest {
+class unit::FunctionTest : public TestBase {
     std::function<void()> f;
 
 public:

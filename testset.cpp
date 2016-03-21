@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "basictest.h"
+#include "testbase.h"
 
 unit::TestSet::TestSet(const std::string &name)
     : name(name), maxNameLength(0) {
@@ -23,8 +23,8 @@ void unit::TestSet::run() {
     for (ITest *test : *this) {
         test->run();
 
-        if (dynamic_cast<BasicTest *>(test))
-            ((BasicTest *)test)->align(maxNameLength);
+        if (dynamic_cast<TestBase *>(test))
+            ((TestBase *)test)->align(maxNameLength);
 
         test->report();
     }

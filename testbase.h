@@ -5,17 +5,17 @@
 #include "itest.h"
 
 namespace unit {
-class BasicTest;
+class TestBase;
 }
 
-class unit::BasicTest : public ITest {
+class unit::TestBase : public ITest {
     std::string name;
     bool passed;
     unsigned short attributes;
     int maxNameLength;
 
 public:
-    BasicTest(const std::string &name);
+    TestBase(const std::string &name);
 
     void align(int maxNameLength);
 

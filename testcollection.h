@@ -31,14 +31,14 @@ public:
 
 template <class F>
 auto unit::TestCollection::$(const std::string &name, F f) -> typename std::enable_if<not std::is_void<typename function_traits<F>::return_type>::value, Test<F, typename Checker<F>::ValueChecker> &>::type {
-    Test<F, typename Checker<F>::ValueChecker> *wrapper = new Test<F, typename Checker<F>::ValueChecker>(name, f);
-    addTest(wrapper);
-    return *wrapper;
+    auto test = new Test<F, typename Checker<F>::ValueChecker>(name, f);
+    addTest(test);
+    return *test;
 }
 
 template <class F>
 auto unit::TestCollection::$(const std::string &name, F f) -> typename std::enable_if<std::is_void<typename function_traits<F>::return_type>::value, Test<F, typename Checker<F>::ActionChecker> &>::type {
-    Test<F, typename Checker<F>::ActionChecker> *wrapper = new Test<F, typename Checker<F>::ActionChecker>(name, f);
-    addTest(wrapper);
-    return *wrapper;
+    auto test = new Test<F, typename Checker<F>::ActionChecker>(name, f);
+    addTest(test);
+    return *test;
 }

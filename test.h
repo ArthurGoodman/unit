@@ -59,9 +59,13 @@ public:
 
     void equal(T value);
     void operator==(T value);
+    void operator=(T value);
 
     void lessThan(T value);
     void operator<(T value);
+
+    void greaterThan(T value);
+    void operator>(T value);
 
     void ok();
 };
@@ -122,6 +126,11 @@ void unit::Checker<F>::ValueChecker::Be::operator==(T value) {
 }
 
 template <class F>
+void unit::Checker<F>::ValueChecker::Be::operator=(T value) {
+    equal(value);
+}
+
+template <class F>
 void unit::Checker<F>::ValueChecker::Be::lessThan(T value) {
     this->checker.check = [=]() {
         return this->predicate(this->checker.f() < value);
@@ -131,6 +140,18 @@ void unit::Checker<F>::ValueChecker::Be::lessThan(T value) {
 template <class F>
 void unit::Checker<F>::ValueChecker::Be::operator<(T value) {
     lessThan(value);
+}
+
+template <class F>
+void unit::Checker<F>::ValueChecker::Be::greaterThan(T value) {
+    this->checker.check = [=]() {
+        return this->predicate(this->checker.f() > value);
+    };
+}
+
+template <class F>
+void unit::Checker<F>::ValueChecker::Be::operator>(T value) {
+    greaterThan(value);
 }
 
 template <class F>

@@ -1,7 +1,7 @@
-debug
-release
+debug/
+release/
 *.user
-Makefile*
+Makefile
 *.Debug
 *.Release
 *.autosave

@@ -3,12 +3,15 @@
 #include "itest.h"
 
 unit::TestCollection::~TestCollection() {
-    for (ITest *test : *this)
-        delete test;
 }
 
 void unit::TestCollection::addTest(ITest *test) {
     tests.push_back(test);
+}
+
+void unit::TestCollection::cleanup() {
+    for (ITest *test : *this)
+        delete test;
 }
 
 std::vector<unit::ITest *>::iterator unit::TestCollection::begin() {

@@ -19,4 +19,8 @@ public:
     std::string getName();
     void run();
     void report();
+
+protected:
+    virtual void preTest();
+    virtual void postTest();
 };

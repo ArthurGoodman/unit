@@ -21,7 +21,9 @@ void unit::TestSet::run() {
     std::cout << "Testing " << name << "\n";
 
     for (ITest *test : *this) {
+        preTest();
         test->run();
+        postTest();
 
         if (dynamic_cast<TestBase *>(test))
             ((TestBase *)test)->align(maxNameLength);
@@ -33,4 +35,10 @@ void unit::TestSet::run() {
 }
 
 void unit::TestSet::report() {
+}
+
+void unit::TestSet::preTest() {
+}
+
+void unit::TestSet::postTest() {
 }

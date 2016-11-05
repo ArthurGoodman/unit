@@ -42,3 +42,7 @@ void unit::TestSet::preTest() {
 
 void unit::TestSet::postTest() {
 }
+
+void unit::TestSet::fail() {
+    throw std::exception();
+}

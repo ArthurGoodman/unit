@@ -23,4 +23,6 @@ public:
 protected:
     virtual void preTest();
     virtual void postTest();
+
+    void fail();
 };

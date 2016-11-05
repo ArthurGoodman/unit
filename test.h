@@ -116,7 +116,11 @@ unit::Checker<F>::ValueChecker::Be::Be(Checker<F> &checker, const std::function<
 template <class F>
 void unit::Checker<F>::ValueChecker::Be::equal(T value) {
     this->checker.check = [=]() {
-        return this->predicate(this->checker.f() == value);
+        try {
+            return this->predicate(this->checker.f() == value);
+        } catch (...) {
+            return this->predicate(false);
+        }
     };
 }
 
@@ -133,7 +137,11 @@ void unit::Checker<F>::ValueChecker::Be::operator=(T value) {
 template <class F>
 void unit::Checker<F>::ValueChecker::Be::lessThan(T value) {
     this->checker.check = [=]() {
-        return this->predicate(this->checker.f() < value);
+        try {
+            return this->predicate(this->checker.f() < value);
+        } catch (...) {
+            return this->predicate(false);
+        }
     };
 }
 
@@ -145,7 +153,11 @@ void unit::Checker<F>::ValueChecker::Be::operator<(T value) {
 template <class F>
 void unit::Checker<F>::ValueChecker::Be::greaterThan(T value) {
     this->checker.check = [=]() {
-        return this->predicate(this->checker.f() > value);
+        try {
+            return this->predicate(this->checker.f() > value);
+        } catch (...) {
+            return this->predicate(false);
+        }
     };
 }
 
@@ -196,15 +208,19 @@ unit::Checker<F>::ActionChecker::ActionChecker(Checker<F> &checker, const std::f
 template <class F>
 void unit::Checker<F>::ActionChecker::print(const std::string &text) {
     this->checker.check = [=]() {
-        std::streambuf *buf = std::cout.rdbuf();
-        std::ostringstream stream;
-        std::cout.rdbuf(stream.rdbuf());
+        try {
+            std::streambuf *buf = std::cout.rdbuf();
+            std::ostringstream stream;
+            std::cout.rdbuf(stream.rdbuf());
 
-        this->checker.f();
+            this->checker.f();
 
-        std::cout.rdbuf(buf);
+            std::cout.rdbuf(buf);
 
-        return this->predicate(stream.str() == text);
+            return this->predicate(stream.str() == text);
+        } catch (...) {
+            return this->predicate(false);
+        }
     };
 }
 

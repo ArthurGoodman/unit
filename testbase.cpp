@@ -3,9 +3,9 @@
 #include <iomanip>
 #include <iostream>
 
-//#include <windows.h>
-
 #ifdef _WIN32
+#include <windows.h>
+
 #define CONSOLE_COLOR_GREEN FOREGROUND_GREEN
 #define CONSOLE_COLOR_RED FOREGROUND_RED
 #elif __linux

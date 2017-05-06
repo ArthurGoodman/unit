@@ -1,0 +1,9 @@
+*.user
+Makefile
+*.Debug
+*.Release
+*.autosave
+*.o
+*.exe
+*.a
+*.stash
